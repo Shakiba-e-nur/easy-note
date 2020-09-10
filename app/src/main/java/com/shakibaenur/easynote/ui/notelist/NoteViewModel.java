@@ -17,9 +17,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.shakibaenur.easynote.R;
 import com.shakibaenur.easynote.ui.addnotes.AddNotestActivity;
+import com.shakibaenur.easynote.util.SharedPrefUtil;
+import com.shakibaenur.easynote.util.SwipeToDeleteCallback;
 import com.shakibaenur.easynote.util.provider.room.database.NoteDatabase;
 import com.shakibaenur.easynote.util.provider.room.model.Note;
 
@@ -120,5 +124,24 @@ public class NoteViewModel extends AndroidViewModel {
 
         alert.setTitle(R.string.dialog_title);
         alert.show();
+    }
+
+    public void enableSwipeToDeleteAndUndo(Activity activity,RecyclerView recyclerView) {
+        SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(activity) {
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                int position = viewHolder.getLayoutPosition();
+                Observable.fromCallable(() -> NoteDatabase.getNoteDatabase(getApplication())
+                        .noteDao().deleteNote(noteListLiveData.getValue().get(position-1)))
+                        .subscribeOn(Schedulers.io()).subscribe(aLong -> {
+
+                });
+
+
+            }
+        };
+
+        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
+        itemTouchhelper.attachToRecyclerView(recyclerView);
     }
 }

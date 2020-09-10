@@ -72,18 +72,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <androidx.appcompat.widget.SearchView
                     android:id="@+id/edit_text_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/height_50"
                     android:autofillHints="@string/text_search"
-                    android:background="@color/colorWhite"
-                    android:drawableEnd="@drawable/ic_search"
-                    android:hint="@string/text_search"
-                    android:inputType="text"
+                    app:searchIcon="@drawable/ic_search"
+                    app:queryHint="@string/text_search"
+                    app:queryBackground="@color/colorWhite"
                     android:padding="@dimen/paddin_7"
                     android:paddingStart="@dimen/paddin_16"
-                    android:paddingEnd="@dimen/paddin_16" />
+                    android:layoutDirection="rtl"
+                    android:paddingEnd="@dimen/paddin_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

@@ -85,6 +85,8 @@
                             android:background="@color/colorWhite"
                             android:drawableEnd="@drawable/ic_search"
                             android:hint="@string/text_search"
+                            android:focusable="false"
+                            android:focusableInTouchMode="true"
                             android:inputType="text"
                             android:padding="@dimen/paddin_7"
                             android:paddingStart="@dimen/paddin_16"

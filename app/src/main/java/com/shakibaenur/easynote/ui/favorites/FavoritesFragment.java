@@ -2,6 +2,7 @@ package com.shakibaenur.easynote.ui.favorites;
 
 
 
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.shakibaenur.easynote.R;
@@ -24,6 +25,24 @@ FavoritesAdapter mAdapter;
         mAdapter = new FavoritesAdapter(getActivity().getApplication());
         mBinding.recycleViewNoteList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.recycleViewNoteList.setAdapter(mAdapter);
+        mBinding.editTextSearch.setOnClickListener(view -> {
+            mBinding.editTextSearch.onActionViewExpanded();
+        });
+        //active search
+        mBinding.editTextSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        //enable swipe delete
+        favouritesViewModel.enableSwipeToDeleteAndUndo(getActivity(),mBinding.recycleViewNoteList);
         setObservers();
     }
 

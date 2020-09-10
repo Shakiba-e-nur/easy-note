@@ -1,7 +1,10 @@
 package com.shakibaenur.easynote.ui.notelist;
 
 import android.app.Application;
+import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,11 +16,26 @@ import com.shakibaenur.easynote.util.base.BaseAdapter;
 import com.shakibaenur.easynote.util.base.BaseViewHolder;
 import com.shakibaenur.easynote.util.provider.room.model.Note;
 
-public class NoteListAdapter extends BaseAdapter<Note> {
-private Application application;
+import java.util.ArrayList;
+import java.util.List;
 
+public class NoteListAdapter extends BaseAdapter<Note> implements Filterable {
+private Application application;
+private List<Note> tempNotes;
     public NoteListAdapter(Application application) {
         this.application = application;
+        tempNotes = new ArrayList<>();
+    }
+
+    @Override
+    public void addItems(List<Note> items) {
+        super.addItems(items);
+        tempNotes.clear();
+        tempNotes.addAll(items);
+    }
+
+    public void setTempNotes(List<Note> tempNotes) {
+        this.tempNotes = tempNotes;
     }
 
     @Override
@@ -28,6 +46,11 @@ private Application application;
     @Override
     public BaseViewHolder<Note> newViewHolder(ViewGroup parent, int viewType) {
         return new NoteListAdapterViewHolder(inflate(parent, R.layout.list_item));
+    }
+
+    @Override
+    public Filter getFilter() {
+        return noteDataFilter;
     }
 
     private class NoteListAdapterViewHolder extends BaseAdapterViewHolder<Note> {
@@ -46,4 +69,30 @@ private Application application;
             //mItemBinding.imageViewFavorite.setImageResource(R.drawable.ic_pink_favorite);
         }
     }
+    private Filter noteDataFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Note> filteredList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(tempNotes);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Note item : getItems()) {
+                    if (item.getTitle().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            getItems().clear();
+            getItems().addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 }

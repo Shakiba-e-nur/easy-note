@@ -61,4 +61,6 @@
     <dimen name="view_60">60dp</dimen>
     <dimen name="view_70">70dp</dimen>
     <dimen name="view_76">76dp</dimen>
+    <dimen name="height_60">60dp</dimen>
+    <dimen name="height_50">50dp</dimen>
 </resources>

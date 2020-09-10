@@ -1,6 +1,9 @@
 package com.shakibaenur.easynote.ui.notelist;
 
 
+import android.view.inputmethod.EditorInfo;
+
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.shakibaenur.easynote.R;
@@ -29,8 +32,28 @@ public class NoteListFragment extends BaseFragment {
         mBinding.recycleViewNoteList.setAdapter(noteListAdapter);
 
         noteListAdapter.setItemClickListener((view, item) -> {
-            noteViewModel.showPreviewDialog(getActivity(),item);
+            noteViewModel.showPreviewDialog(getActivity(), item);
         });
+        mBinding.editTextSearch.setOnClickListener(view -> {
+            mBinding.editTextSearch.onActionViewExpanded();
+        });
+        //enable search filter
+        mBinding.editTextSearch.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        mBinding.editTextSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                noteListAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        //enable swipe delete
+        noteViewModel.enableSwipeToDeleteAndUndo(getActivity(),mBinding.recycleViewNoteList);
         setObservers();
     }
 
