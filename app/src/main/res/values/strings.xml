@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Easy Note</string>
+    <string name="text_get_started">Get started</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_note_list">Note List</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_schedules">Schedules</string>
+    <string name="title_settings">Settings</string>
+    <string name="welcome">Welcome</string>
+    <string name="user_name">Username</string>
+    <string name="text_search">Search</string>
+    <string name="text_30">30</string>
+    <string name="text_notes">Notes</string>
+    <string name="text_reminder">Reminder</string>
+    <string name="text_13">13</string>
+    <string name="text_0">0</string>
+    <string name="my_notes">My Notes</string>
+    <string name="text_jun">Jun</string>
+    <string name="java">Java</string>
+    <string name="text_description">Pre Planning..asdfasdf asdf asdf asdf asdf asdf asdf sadf asdf asdfsadf sdahf asduhf klasdhfk adfhs lasdkfh laksdfhjl kasdfhlk asdfhl asdhfl asdhklfjas dlkfjhl asdkfhjl kas</string>
+    <string name="text_10_30pm">10:30pm</string>
+    <string name="add_notes">Add Notes</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="dialog_message">Do you want to delete?</string>
+    <string name="dialog_title">Warning!</string>
+</resources>
