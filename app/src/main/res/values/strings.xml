@@ -10,7 +10,7 @@
     <string name="title_schedules">Schedules</string>
     <string name="title_settings">Settings</string>
     <string name="welcome">Welcome</string>
-    <string name="user_name">Username</string>
+    <string name="user_name">Shakiba</string>
     <string name="text_search">Search</string>
     <string name="text_30">30</string>
     <string name="text_notes">Notes</string>
@@ -28,4 +28,5 @@
     <string name="dialog_message">Do you want to delete?</string>
     <string name="dialog_title">Warning!</string>
     <string name="btn_done">Done</string>
+    <string name="coming_soon">Comming Soon</string>
 </resources>
