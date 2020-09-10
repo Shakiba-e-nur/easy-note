@@ -78,7 +78,7 @@ private List<Note> tempNotes;
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
                 for (Note item : getItems()) {
-                    if (item.getTitle().toLowerCase().contains(filterPattern)) {
+                    if (item.getTitle().toLowerCase().contains(filterPattern)|| item.getDescription().toLowerCase().contains(filterPattern) || item.getDate().toLowerCase().contains(filterPattern) || item.getTime().toLowerCase().contains(filterPattern))  {
                         filteredList.add(item);
                     }
                 }
