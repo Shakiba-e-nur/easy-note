@@ -5,12 +5,15 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -97,21 +100,35 @@ public class AddNotesViewModel extends AndroidViewModel {
     public void showDatePickerDialog(final Activity activity) {
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setContentView(R.layout.dialog_date_picker);
         DatePicker datePicker = dialog.findViewById(R.id.date_picker);
-        datePicker.setOnDateChangedListener((datePicker1, i, i1, i2) -> {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            datePicker.setOnDateChangedListener((datePicker1, i, i1, i2) -> {
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(datePicker1.getYear(), datePicker1.getMonth(), datePicker1.getDayOfMonth());
-            String dateString = sdf.format(calendar.getTime());
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(datePicker1.getYear(), datePicker1.getMonth(), datePicker1.getDayOfMonth());
+                String dateString = sdf.format(calendar.getTime());
 
-            text_date.setValue(dateString);
-            dialog.dismiss();
-        });
+                text_date.setValue(dateString);
+                dialog.dismiss();
+            });
+        } else {
+            ImageView btn_done = dialog.findViewById(R.id.img_done);
+            btn_done.setVisibility(View.VISIBLE);
+            btn_done.setOnClickListener(view -> {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
+                String dateString = sdf.format(calendar.getTime());
+
+                text_date.setValue(dateString);
+                dialog.dismiss();
+            });
+        }
 
         dialog.show();
     }
@@ -149,12 +166,12 @@ public class AddNotesViewModel extends AndroidViewModel {
     }
 
 
-    public void updateNote(Activity activity,Note note) {
+    public void updateNote(Activity activity, Note note) {
         Observable.fromCallable(() -> NoteDatabase.getNoteDatabase(getApplication())
                 .noteDao().updateNote(note))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(aLong -> {
-                activity.finish();
+            activity.finish();
         });
     }
 }
