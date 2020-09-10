@@ -61,11 +61,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_view_date" />
                 <TextView
                     android:id="@+id/text_view_note_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_18"
                     android:text="@string/text_notes"
+                    android:layout_marginEnd="@dimen/margin_32"
+                    android:layout_marginStart="@dimen/margin_32"
                     android:textSize="@dimen/text_size_18"
+                    android:gravity="center"
+                    android:textAlignment="center"
                     android:textColor="@color/colorText"
                     android:fontFamily="@font/poppins_bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -74,15 +78,16 @@
 
                 <TextView
                     android:id="@+id/text_view_note_description"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="@dimen/margin_32"
                     android:layout_marginTop="@dimen/text_margin_8"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="@dimen/margin_32"
                     android:gravity="center"
                     android:text="@string/text_description"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/card_view_calender"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_note_title" />
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_view_calender"
@@ -112,8 +117,9 @@
 
                     <ImageView
                         android:id="@+id/img_edit"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:padding="@dimen/paddin_8"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/view"
@@ -122,8 +128,9 @@
 
                     <ImageView
                         android:id="@+id/img_delete"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:padding="@dimen/paddin_8"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/view"
                         app:layout_constraintStart_toStartOf="parent"
@@ -131,6 +138,16 @@
                         app:srcCompat="@android:drawable/ic_menu_delete" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/btn_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_favorite"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/img_favorite"
+                    app:srcCompat="@drawable/ic_baseline_cancel_24" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

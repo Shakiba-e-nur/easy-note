@@ -58,7 +58,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_layout_components"
+                    android:id="@+id/linear_layout_components"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/text_margin_32"

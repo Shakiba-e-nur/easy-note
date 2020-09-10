@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.shakibaenur.easynote.R;
 import com.shakibaenur.easynote.ui.addnotes.AddNotestActivity;
+import com.shakibaenur.easynote.util.AppConstraints;
 import com.shakibaenur.easynote.util.SharedPrefUtil;
 import com.shakibaenur.easynote.util.SwipeToDeleteCallback;
 import com.shakibaenur.easynote.util.provider.room.database.NoteDatabase;
@@ -69,6 +70,7 @@ public class NoteViewModel extends AndroidViewModel {
         ImageView img_action_delete = dialog.findViewById(R.id.img_delete);
         ImageView img_action_edit = dialog.findViewById(R.id.img_edit);
         ImageView img_action_favorite = dialog.findViewById(R.id.img_favorite);
+        ImageView img_close = dialog.findViewById(R.id.btn_close);
 
         //setup contents
         date_text.setText(note.getDateNumber());
@@ -81,11 +83,21 @@ public class NoteViewModel extends AndroidViewModel {
         img_action_edit.setOnClickListener(view -> {
             Intent intent = new Intent(activity, AddNotestActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(AppConstraints.IntentData.DATA_ID, note.getId());
+            intent.putExtra(AppConstraints.IntentData.DATA_TITLE, note.getTitle());
+            intent.putExtra(AppConstraints.IntentData.DATA_DESCRIPTION, note.getDescription());
+            intent.putExtra(AppConstraints.IntentData.DATA_DATE, note.getDate());
+            intent.putExtra(AppConstraints.IntentData.DATA_TIME, note.getTime());
+
             activity.startActivity(intent);
+            dialog.dismiss();
+        });
+        img_close.setOnClickListener(view -> {
             dialog.dismiss();
         });
         img_action_delete.setOnClickListener(view -> {
             confirmationDialog(activity, dialog, note);
+
         });
 
 
@@ -96,7 +108,7 @@ public class NoteViewModel extends AndroidViewModel {
         dialog.show();
     }
 
-    private void confirmationDialog(Activity activity, Dialog dialog, Note note) {
+    private void confirmationDialog(Activity activity, Dialog dialogParent, Note note) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
         //Setting message manually and performing action on button click
@@ -109,13 +121,15 @@ public class NoteViewModel extends AndroidViewModel {
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribeOn(Schedulers.io()).subscribe(aLong -> {
                             dialog.dismiss();
+                            dialogParent.dismiss();
 
                         });
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //   alert.dismiss();
+                        dialog.dismiss();
+                       // dialogParent.dismiss();
 
                     }
                 });
@@ -126,13 +140,13 @@ public class NoteViewModel extends AndroidViewModel {
         alert.show();
     }
 
-    public void enableSwipeToDeleteAndUndo(Activity activity,RecyclerView recyclerView) {
+    public void enableSwipeToDeleteAndUndo(Activity activity, RecyclerView recyclerView) {
         SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(activity) {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
                 int position = viewHolder.getLayoutPosition();
                 Observable.fromCallable(() -> NoteDatabase.getNoteDatabase(getApplication())
-                        .noteDao().deleteNote(noteListLiveData.getValue().get(position-1)))
+                        .noteDao().deleteNote(noteListLiveData.getValue().get(position - 1)))
                         .subscribeOn(Schedulers.io()).subscribe(aLong -> {
 
                 });

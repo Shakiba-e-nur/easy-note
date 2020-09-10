@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<variable
+    name="homeViewModel"
+    type="com.shakibaenur.easynote.ui.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,10 +15,6 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
         tools:context=".ui.home.HomeFragment">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -94,13 +92,14 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_layout_components"
+                <LinearLayout
+                    android:id="@+id/linear_layout_components"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/text_margin_32"
                     android:layout_marginTop="@dimen/margin_top_34"
                     android:layout_marginEnd="@dimen/text_margin_32"
+                    android:orientation="horizontal"
                     android:background="@color/colorPrimaryDark"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -108,13 +107,12 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_view_notes"
-                        android:layout_width="@dimen/card_view_98"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/card_view_62"
                         android:background="@color/colorNote"
+                        android:layout_weight="1.6"
                         android:elevation="@dimen/elevation_4"
-                        app:cardCornerRadius="@dimen/card_view_radius_5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:cardCornerRadius="@dimen/card_view_radius_5">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -163,14 +161,13 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_view_reminders"
-                        android:layout_width="@dimen/card_view_98"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/card_view_62"
                         android:layout_marginStart="@dimen/text_margin_8"
+                        android:layout_weight="1.6"
                         android:background="@color/colorReminder"
                         android:elevation="@dimen/elevation_4"
-                        app:cardCornerRadius="@dimen/card_view_radius_5"
-                        app:layout_constraintStart_toEndOf="@id/card_view_notes"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:cardCornerRadius="@dimen/card_view_radius_5">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -219,13 +216,13 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_view_schedules"
-                        android:layout_width="@dimen/card_view_133"
+                        android:layout_width="match_parent"
                         android:layout_height="@dimen/card_view_62"
+                        android:layout_weight="1.4"
+                        android:layout_marginStart="@dimen/text_margin_8"
                         android:background="@color/colorSchedules"
                         android:elevation="@dimen/elevation_4"
-                        app:cardCornerRadius="@dimen/card_view_radius_5"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:cardCornerRadius="@dimen/card_view_radius_5">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -271,33 +268,70 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.cardview.widget.CardView>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_view_calender"
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:paddingTop="@dimen/padding_16"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:clipToPadding="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_components">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/card_view_320"
-                    android:layout_marginStart="@dimen/text_margin_32"
-                    android:layout_marginTop="@dimen/margin_top_34"
-                    android:layout_marginEnd="@dimen/text_margin_32"
-                    android:elevation="@dimen/elevation_4"
-                    app:cardCornerRadius="@dimen/card_view_radius_5"
-                    app:layout_constraintTop_toBottomOf="@+id/constraint_layout_components">
-
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card_view_calender"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/text_margin_32"
 
-                        <CalendarView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_marginEnd="@dimen/text_margin_32"
+                            android:elevation="@dimen/elevation_4"
+                            app:cardCornerRadius="@dimen/card_view_radius_5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <CalendarView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/my_notes_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_32"
+                            android:text="@string/my_notes"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="@id/card_view_calender"
+                            app:layout_constraintTop_toBottomOf="@id/card_view_calender" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+                   <androidx.recyclerview.widget.RecyclerView
+                       android:layout_width="match_parent"
+                       android:layout_height="400dp"/>
+                </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
 
-                </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

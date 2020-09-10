@@ -147,4 +147,12 @@ public class AddNotesViewModel extends AndroidViewModel {
     }
 
 
+    public void updateNote(Activity activity,Note note) {
+        Observable.fromCallable(() -> NoteDatabase.getNoteDatabase(getApplication())
+                .noteDao().updateNote(note))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).subscribe(aLong -> {
+                activity.finish();
+        });
+    }
 }
