@@ -2,18 +2,23 @@ package com.shakibaenur.easynote.util;
 
 public class AppConstraints {
    public interface LogConstraints{
-         final String COMMON_TAG="chk";
+         String COMMON_TAG="chk";
    }
    public interface ErrorMessage{
-        final String ERROR_NOTE_TITLE="Title Required!";
-        final String ERROR_NOTE_DESCRIPTION="Description Required!";
+        String ERROR_NOTE_TITLE="Title Required!";
+        String ERROR_NOTE_DESCRIPTION="Description Required!";
    }
    public interface IntentData{
-       final String DATA_TITLE = "title";
-       final String DATA_DESCRIPTION = "description";
-       final String DATA_TIME = "data_time";
-       final String DATA_DATE = "data_date";
+       String DATA_TITLE = "title";
+       String DATA_DESCRIPTION = "description";
+       String DATA_TIME = "data_time";
+       String DATA_DATE = "data_date";
        String DATA_ID = "data_id";
+
+   }
+   public interface PreferenceData{
+       String IS_LOGIN = "is_login";
+       String VALUE_POSITIVE_LOGIN = "yes" ;
    }
 
 }

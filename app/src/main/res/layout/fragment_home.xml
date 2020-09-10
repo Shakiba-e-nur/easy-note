@@ -53,7 +53,7 @@
                 android:layout_height="@dimen/image_44dp"
                 android:layout_marginTop="@dimen/text_margin_32"
                 android:layout_marginEnd="@dimen/text_margin_32"
-                android:src="@drawable/ic_black_home"
+                android:src="@drawable/img_user"
                 app:civ_border_width="@dimen/civ_border_width_2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

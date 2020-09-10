@@ -10,6 +10,7 @@ import com.shakibaenur.easynote.R;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 @Entity(tableName = "note_table")
 public class Note {
@@ -88,6 +89,19 @@ public class Note {
         return month;
     }
 
+//    public int getColorValue()
+//    {
+//        int index = randInt()
+//    }
+    public static int randInt(int min, int max) {
+
+
+        Random rand=new Random();
+
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        return randomNum;
+    }
     public boolean isFavourite() {
         return isFavourite;
     }
