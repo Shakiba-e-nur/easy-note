@@ -5,10 +5,12 @@ import android.content.Intent;
 import com.shakibaenur.easynote.R;
 import com.shakibaenur.easynote.databinding.ActivitySplashBinding;
 import com.shakibaenur.easynote.ui.main.MainActivity;
+
 import com.shakibaenur.easynote.util.base.BaseActivity;
 
 public class SplashActivity extends BaseActivity {
     ActivitySplashBinding mBinding;
+
 
     @Override
     public int setLayoutId() {

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPrefUtil {
-    public static final String DEFAULT_NAME = "ujala_pref";
+    public static final String DEFAULT_NAME = "note_pref";
 
     public static void ADD_PREFERENCE(Context context, String name, String value) {
 
