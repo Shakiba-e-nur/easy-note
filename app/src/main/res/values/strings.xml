@@ -27,5 +27,6 @@
     <string name="description">Description</string>
     <string name="dialog_message">Do you want to delete?</string>
     <string name="dialog_title">Warning!</string>
+    <string name="btn_done">Done</string>
     <string name="coming_soon">Comming Soon</string>
 </resources>
