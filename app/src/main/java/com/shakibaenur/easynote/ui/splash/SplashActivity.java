@@ -6,6 +6,7 @@ import com.shakibaenur.easynote.R;
 import com.shakibaenur.easynote.databinding.ActivitySplashBinding;
 import com.shakibaenur.easynote.ui.main.MainActivity;
 
+import com.shakibaenur.easynote.util.SharedPrefUtil;
 import com.shakibaenur.easynote.util.base.BaseActivity;
 
 public class SplashActivity extends BaseActivity {
@@ -33,5 +34,9 @@ public class SplashActivity extends BaseActivity {
     private void goNext() {
         startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+    private void checkFirstLogin()
+    {
+       // SharedPrefUtil.GET_PREFERENCE(getApplication(),)
     }
 }
