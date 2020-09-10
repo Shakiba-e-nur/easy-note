@@ -5,103 +5,103 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-    <variable
-        name="noteViewModel"
-        type="com.shakibaenur.easynote.ui.notelist.NoteViewModel" />
+
+        <variable
+            name="noteViewModel"
+            type="com.shakibaenur.easynote.ui.notelist.NoteViewModel" />
     </data>
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.notelist.NoteListFragment">
+
+
+        <TextView
+            android:id="@+id/text_note_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin_32"
+            android:layout_marginTop="@dimen/text_margin_32"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/my_notes"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/text_size_24"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_add_notes"
+            android:layout_width="@dimen/image_24"
+            android:layout_height="@dimen/image_24"
+            android:layout_marginTop="@dimen/text_margin_40"
+            android:layout_marginEnd="@dimen/text_margin_12"
+            android:onClick="@{()->noteViewModel.goToAddNotes()}"
+            android:src="@drawable/ic_pink_add_notes"
+            app:layout_constraintEnd_toStartOf="@id/image_orientation"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/image_orientation"
+            android:layout_width="@dimen/image_24"
+            android:layout_height="@dimen/image_24"
+            android:layout_marginTop="@dimen/text_margin_40"
+            android:layout_marginEnd="@dimen/text_margin_36"
+            android:src="@drawable/ic_orientation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin_32"
+            android:layout_marginTop="@dimen/text_margin_32"
+            android:layout_marginEnd="@dimen/text_margin_32"
+            android:background="@color/colorWhite"
+            android:elevation="@dimen/elevation_4"
+            app:cardCornerRadius="@dimen/paddin_7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_note_title">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                tools:context=".ui.notelist.NoteListFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-
-                <TextView
-                    android:id="@+id/text_note_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/text_margin_32"
-                    android:layout_marginTop="@dimen/text_margin_32"
-                    android:fontFamily="@font/poppins_bold"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorText"
-                    android:text="@string/my_notes"
-                    android:textSize="@dimen/text_size_24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <ImageView
-                    android:id="@+id/image_add_notes"
-                    android:layout_width="@dimen/image_24"
-                    android:layout_height="@dimen/image_24"
-                    android:layout_marginTop="@dimen/text_margin_40"
-                    android:onClick="@{()->noteViewModel.goToAddNotes()}"
-                    android:layout_marginEnd="@dimen/text_margin_12"
-                    android:src="@drawable/ic_pink_add_notes"
-                    app:layout_constraintEnd_toStartOf="@id/image_orientation"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-
-                <ImageView
-                    android:id="@+id/image_orientation"
-                    android:layout_width="@dimen/image_24"
-                    android:layout_height="@dimen/image_24"
-                    android:layout_marginTop="@dimen/text_margin_40"
-                    android:layout_marginEnd="@dimen/text_margin_36"
-                    android:src="@drawable/ic_orientation"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_view_search"
+                <EditText
+                    android:id="@+id/edit_text_search"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/text_margin_32"
-                    android:layout_marginTop="@dimen/text_margin_32"
-                    android:layout_marginEnd="@dimen/text_margin_32"
+                    android:layout_height="match_parent"
+                    android:autofillHints="@string/text_search"
                     android:background="@color/colorWhite"
-                    android:elevation="@dimen/elevation_4"
-                    app:cardCornerRadius="@dimen/paddin_7"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_note_title">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <EditText
-                            android:id="@+id/edit_text_search"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:autofillHints="@string/text_search"
-                            android:background="@color/colorWhite"
-                            android:drawableEnd="@drawable/ic_search"
-                            android:hint="@string/text_search"
-                            android:inputType="text"
-                            android:padding="@dimen/paddin_7"
-                            android:paddingStart="@dimen/paddin_16"
-                            android:paddingEnd="@dimen/paddin_16" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
+                    android:drawableEnd="@drawable/ic_search"
+                    android:hint="@string/text_search"
+                    android:inputType="text"
+                    android:padding="@dimen/paddin_7"
+                    android:paddingStart="@dimen/paddin_16"
+                    android:paddingEnd="@dimen/paddin_16" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycle_view_note_list"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="32dp"
-                    android:paddingTop="@dimen/padding_32"
-                    android:paddingBottom="@dimen/padding_64"
-                    android:clipToPadding="false"
-                    android:layout_marginEnd="32dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/card_view_search" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_note_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_16"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/margin_16"
+            android:paddingBottom="@dimen/padding_64"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_search" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>
